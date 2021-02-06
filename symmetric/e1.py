@@ -5,12 +5,14 @@ import binascii
 import Padding
 import argparse
 import base64
+from termcolor import colored
 
 parser = argparse.ArgumentParser(description='Do some crypt magic...')
 parser.add_argument("-p", "--plaintext", help="the plaintext to be encrypted")
-parser.add_argument("-k", "--key", nargs='+', help="the key used to encrypt the plaintext", required=True)
+parser.add_argument("-k", "--key", nargs='+', help="the key used to encrypt the plaintext")
 parser.add_argument("-c", "--ciphertext", help="the cipher text to be decoded")
 parser.add_argument("-b64", "--base64", help="decodes a base 64 string because decrypting",action="store_true")
+parser.add_argument("-f", "--file", help="use a file as the key input")
 args = parser.parse_args()
 
 val=args.plaintext
@@ -27,22 +29,22 @@ def decrypt(ciphertext,key, mode):
 	return(encobj.decrypt(ciphertext))
 
 
+
 def decrypt_and_depad(key):
-	print(f"Decrypting ciphertext: {args.ciphertext} \nWith key: {key}")
 	ciphertext=ciphertextinput.encode()
 	if(args.base64):
 		ciphertext=base64.b64decode(ciphertext)
 	else:
 		ciphertext=binascii.unhexlify(ciphertext)
-#	print(f"Ciphertext {ciphertext}")
 	plaintext = decrypt(ciphertext,key,AES.MODE_ECB)
-#	print(plaintext)
 
 	try:
 		plaintext = Padding.removePadding(plaintext.decode(),mode='CMS')
-		print(f"Plaintext: {plaintext}")
+		print(f"Decrypting ciphertext: {args.ciphertext} \nWith key: {key}")
+		print(colored(f"Plaintext: {plaintext}", "green"))
+
 	except:
-		print(f"Error decrypting, probably wrong key supplied")
+		pass
 
 
 def encrypt_and_pad(key):
@@ -54,14 +56,22 @@ def encrypt_and_pad(key):
 
 
 def sort_keys():
+	if(args.file):
+		with open(args.file) as f:
+			content = f.readlines()
+			key = [x.strip() for x in content]
+
+	else:
+		key = args.key
+
 	keys = []
-	for i, k in enumerate(args.key):
-		keys.append(hashlib.sha256(args.key[i].encode()).digest())
+	for i, k in enumerate(key):
+		keys.append(hashlib.sha256(key[i].encode()).digest())
 	return keys
 
 
 key = sort_keys()
-print(key)
+
 if(plaintext):
 	encrypt_and_pad(key)
 else:
