@@ -7,6 +7,12 @@ import argparse
 import base64
 from termcolor import colored
 
+# usage python3 e1.py -c 5I71KpfT6RdM/xhUJ5IKCQ==  -k 123456 -b64
+# can accept plaintext and key for encrypt, or cipher text and key for decrypt
+# can accept a file for multiple key attempts with -f, or multiple keys
+# specified on cmd line -k password1 password2
+# who needs error handling?
+
 parser = argparse.ArgumentParser(description='Do some crypt magic...')
 parser.add_argument("-p", "--plaintext", help="the plaintext to be encrypted")
 parser.add_argument("-k", "--key", nargs='+', help="the key used to encrypt the plaintext")
@@ -31,6 +37,7 @@ def decrypt(ciphertext,key, mode):
 
 
 def decrypt_and_depad(key):
+	"""Checks argparse for base64 before attempting the decrypt and depad"""
 	ciphertext=ciphertextinput.encode()
 	if(args.base64):
 		ciphertext=base64.b64decode(ciphertext)
@@ -56,6 +63,10 @@ def encrypt_and_pad(key):
 
 
 def sort_keys():
+	"""If the arg.parse is a file, sort the file into a list with no \n
+	Loop through list of keys and format.
+
+	returns list of hashed keys"""
 	if(args.file):
 		with open(args.file) as f:
 			content = f.readlines()
