@@ -1,0 +1,43 @@
+Test:'This is a test' 
+Pass Phrase: hello
+Type: Aes128
+Ciphertext: J2w0ywBu/f8pfcUUMkVvcw==
+Salt: u1YPMMlED8nsJeInY3xqIg==
+
+Test:'France' 
+Pass Phrase: Qwerty123
+Type: Aes192
+Nodejs crypto is a set of wrappers for the openssl version installed on the system. Getting a list of supported has function via 'openssl list -digest-algorithms' shows sha192 is not supported in my version. 
+I've truncate the key 
+Ciphertext: mnmGHrCm0TAtX48m3kXw3Q==
+Salt: j2RpIh1bTgz4XANcZhiYcg==
+
+Test:'Germany' 
+Pass Phrase: Testing123
+Type: Aes256
+Ciphertext: Oxs1GzUrPUNCJrjgQUJphQ==
+Salt: 5Vvi6U9uATQ3qTPWxQ5J/g==
+
+
+(Salt as empty string)
+Test:'This is a test' 
+Pass Phrase: hello
+Type: Aes128
+Ciphertext: egYyn9oZh6Z6ZLNHEPrFPA==
+Salt: AAAAAAAAAAAAAAAAAAAAAA==
+
+Test:'France' 
+Pass Phrase: Qwerty123
+Type: Aes192
+Ciphertext: ce2cfvamaAmxCljrMnou2g==
+Salt: AAAAAAAAAAAAAAAAAAAAAA==
+
+Test:'Germany' 
+Pass Phrase: Testing123
+Type: Aes256
+Ciphertext: YuD3yiJeSz4dQ/PP8L+IsA==
+Salt: AAAAAAAAAAAAAAAAAAAAAA==
+
+Cipher text doesn't change if the iv is fixed. 
+
+
