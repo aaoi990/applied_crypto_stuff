@@ -57,8 +57,8 @@ else if (algorithm.includes("128"))
 }
 
 // The iv is just a buffer filled with random. This is what changes to an empty string for part 2
-const iv=new Buffer.alloc(16, crypto.pseudoRandomBytes(16));
-//const iv=new Buffer.alloc(16, '');
+//const iv=new Buffer.alloc(16, crypto.pseudoRandomBytes(16));
+const iv=new Buffer.alloc(16);
 
 console.log("Key:\t\t"+key.toString('base64'));
 console.log("Salt:\t\t"+iv.toString('base64'));
