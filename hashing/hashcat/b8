@@ -1,0 +1,5 @@
+hashcat -a 3 -m 0 b8.hash password?d --force
+db0edd04aaac4506f7edab03ac855d56:password5
+
+hashcat -a 3 -m 0 b8.hash password?u --force
+7a6c8de8ad7f89b922cc29c9505f58c3:passwordW

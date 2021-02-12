@@ -1,0 +1,240 @@
+Abiu
+Açaí
+Acerola
+Ackee
+Apple
+Apricot
+Avocado
+Banana
+Bilberry
+Blackberry
+Blackcurrant
+Black sapote
+Blueberry
+Boysenberry
+Breadfruit
+Buddha's hand
+Cactus pear
+Cempedak
+Crab apple
+Currant
+Cherry
+Cherimoya
+Chico fruit
+Cloudberry
+Coco De Mer
+Coconut
+Cranberry
+Damson
+Date
+Dragonfruit
+Durian
+Egg Fruit
+Elderberry
+Feijoa
+Fig
+Goji berry
+Gooseberry
+Grape
+Grewia asiatica
+Raisin
+Grapefruit
+Guava
+Hala Fruit
+Honeyberry
+Huckleberry
+Jabuticaba
+Jackfruit
+Jambul
+Japanese plum
+Jostaberry
+Jujube
+Juniper berry
+Kiwano
+Kiwifruit
+Kumquat
+Lemon
+Lime
+Loganberry
+Loquat
+Longan
+Lulo
+Lychee
+Mamey Apple
+Mamey Sapote
+Mango
+Mangosteen
+Marionberry
+Melon
+Cantaloupe
+Galia melon
+Honeydew
+Watermelon
+Miracle fruit
+Monstera deliciosa
+Mulberry
+Nance
+Nectarine
+Orange
+Blood orange
+Clementine
+Mandarine
+Tangerine
+Papaya
+Passionfruit
+Peach
+Pear
+Persimmon
+Plantain
+Plum
+Prune 
+Pineapple
+Pineberry
+Plumcot
+Pomegranate
+Pomelo
+Purple mangosteen
+Quince
+Raspberry
+Salmonberry
+Rambutan
+Redcurrant
+Rose apple
+Salal berry
+Salak
+Satsuma
+Shine Muscat
+Soursop
+Star apple
+Star fruit
+Strawberry
+Surinam cherry
+Tamarillo
+Tamarind
+Tangelo
+Tayberry
+Tomato
+Ugli fruit
+White currant
+White sapote
+Yuzu
+abiu
+açaí
+acerola
+ackee
+apple
+apricot
+avocado
+banana
+bilberry
+blackberry
+blackcurrant
+black sapote
+blueberry
+boysenberry
+breadfruit
+buddha's hand
+cactus pear
+cempedak
+crab apple
+currant
+cherry
+cherimoya
+chico fruit
+cloudberry
+coco de mer
+coconut
+cranberry
+damson
+date
+dragonfruit
+durian
+egg fruit
+elderberry
+feijoa
+fig
+goji berry
+gooseberry
+grape
+grewia asiatica
+raisin
+grapefruit
+guava
+hala fruit
+honeyberry
+huckleberry
+jabuticaba
+jackfruit
+jambul
+japanese plum
+jostaberry
+jujube
+juniper berry
+kiwano
+kiwifruit
+kumquat
+lemon
+lime
+loganberry
+loquat
+longan
+lulo
+lychee
+mamey apple
+mamey sapote
+mango
+mangosteen
+marionberry
+melon
+cantaloupe
+galia melon
+honeydew
+watermelon
+miracle fruit
+monstera deliciosa
+mulberry
+nance
+nectarine
+orange
+blood orange
+clementine
+mandarine
+tangerine
+papaya
+passionfruit
+peach
+pear
+persimmon
+plantain
+plum
+prune 
+pineapple
+pineberry
+plumcot
+pomegranate
+pomelo
+purple mangosteen
+quince
+raspberry
+salmonberry
+rambutan
+redcurrant
+rose apple
+salal berry
+salak
+satsuma
+shine muscat
+soursop
+star apple
+star fruit
+strawberry
+surinam cherry
+tamarillo
+tamarind
+tangelo
+tayberry
+tomato
+ugli fruit
+white currant
+white sapote
+yuzu
