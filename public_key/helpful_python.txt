@@ -1,0 +1,2 @@
+find e: list(filter(lambda e: math.gcd(e, phi) == 1, range(2, phi)))
+find d: list(filter(lambda e: e*13 % phi == 1, range(1, phi)))
