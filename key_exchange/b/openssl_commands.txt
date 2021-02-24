@@ -1,1 +1,0 @@
-openssl dhparam -inform PEM -in dhparams.pem -check -text
