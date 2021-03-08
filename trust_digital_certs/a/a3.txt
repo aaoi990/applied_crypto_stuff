@@ -1,0 +1,13 @@
+Certificate chain
+ 0 s:C = US, ST = Washington, L = Redmond, O = Microsoft Corporation, CN = Outlook.live.com
+   i:C = US, O = DigiCert Inc, CN = DigiCert Cloud Services CA-1
+ 1 s:C = US, O = DigiCert Inc, CN = DigiCert Cloud Services CA-1
+   i:C = US, O = DigiCert Inc, OU = www.digicert.com, CN = DigiCert Global Root CA
+
+
+subject: 
+CN = Outlook.live.com
+
+issuer:
+CN = DigiCert Global Root CA
+

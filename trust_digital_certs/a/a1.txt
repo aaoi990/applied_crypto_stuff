@@ -1,0 +1,8 @@
+CN = Common name the FQDN of the web server that will recive the cert i.e www.test.com - does not include the protocol or ports. 
+Warnings are shown if the FQDN does not match the CN in the cert
+
+ON = organisational unit
+
+O = Organisation
+
+L = Location
