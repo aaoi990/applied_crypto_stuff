@@ -193,5 +193,41 @@ k-NN removal (X = 50): "The 50 closest items to each unsafe item are removed." U
 Which is better depends on what you actually want to guarantee. If your worry is "I never want anything fundamentally similar to this unsafe item," radius is more interpretable — you set a similarity ceiling and that's the contract. If your worry is "remove a roughly fixed-size halo around each unsafe item regardless of how the data looks," k-NN is cleaner.
 For your cars dataset (categorical Jaccard), I'd lean radius, because Jaccard distance has a meaningful real-world interpretation (proportion of features differing) and you can set it intentionally. But k-NN is faster and simpler — one LSH query per unsafe item, no full distance computations.
 A pragmatic hybrid: use k-NN to fetch candidates cheaply, then filter those by a distance threshold to be safe. That way you get LSH's speed and the threshold's guarantee. Costs you one exact distance per LSH-returned neighbour, which is trivial.
-One nice property of either filtering approach for your rerun workflow: it composes. Each time you re-run with a grown unsafe_ids set, the filter just gets stricter, the candidate pool shrinks, and the selection algorithm runs unchanged. The selection algorithm never has to know about unsafe items at all — it just sees a clean smaller dataset.Opus 4.7Adaptive
+One nice property of either filtering approach for your rerun workflow: it composes. Each time you re-run with a grown unsafe_ids set, the filter just gets stricter, the candidate pool shrinks, and the selection algorithm runs unchanged. The selection algorithm never has to know about unsafe items at all — it just sees a clean smaller dataset.
 
+
+
+Yes, exactly the same way — just swap the LSH query for a distance check against SAFETY_RADIUS. The structure is identical, only the membership test changes:
+pythonunsafe_ids = {...}
+active_ids = {...}
+SAFETY_RADIUS = 0.3
+
+forbidden = set(unsafe_ids)
+for u in unsafe_ids:
+    for entry_id, _ in self.data_entries:
+        if entry_id in active_ids:
+            continue                                   # seeds survive
+        if entry_id == u:
+            continue
+        if self.compute_distance(entry_id, u) < SAFETY_RADIUS:
+            forbidden.add(entry_id)
+
+filtered_entries = [(eid, data) for eid, data in self.data_entries
+                    if eid not in forbidden]
+# run selection on filtered_entries as normal
+Same architecture as the k-NN version, same "seeds survive" exception, same downstream invariance — the selection algorithm has no idea unsafe items exist, it just sees a smaller dataset.
+The trade-off compared to the k-NN approach is cost vs. guarantee:
+Cost: this does |dataset| × |unsafe| exact distance computations up front. For your cars (thousands of items, presumably a handful of unsafe items at any time) that's trivial — a few thousand Jaccard computations, runs in milliseconds. If you had hundreds of unsafe items on a much larger dataset it could matter, but you're nowhere near that.
+Guarantee: in exchange you get the exact semantic you actually want — "nothing within similarity distance R of any unsafe item" — instead of "the 50 most similar items happen to be removed." The radius is a contract; the k-NN count is an artifact of how the data clusters.
+The hybrid I mentioned earlier is the practical sweet spot if you ever scale up:
+pythonfor u in unsafe_ids:
+    # Fast: LSH narrows the candidate set to "probably close" items
+    candidates = self.lsh_forest.query(self.minhashes[u], k=200)
+    for n in candidates:
+        if n == u or n in active_ids:
+            continue
+        # Exact: verify with the real distance
+        if self.compute_distance(n, u) < SAFETY_RADIUS:
+            forbidden.add(n)
+That uses LSH to skip the vast majority of items (most of the dataset isn't anywhere near any given unsafe item, so why compute), then exact distance to confirm the ones LSH flags as plausible. You keep the radius's clean semantic guarantee, and pay roughly |unsafe| × 200 distance computations instead of |unsafe| × |dataset|. For your current scale it's overkill, but the pattern's there when you need it.
+One quiet benefit of doing this as preprocessing rather than as a check inside the selection loop: the selection algorithm stays completely untouched. No special-case code, no extra parameters, no conditional logic for unsafe items. The "filter → select" architecture is much easier to test, reason about, and rerun than weaving unsafe-handling through the greedy loop. Your code stays simple and the unsafe behaviour is one isolated function you can swap or tune independently.
